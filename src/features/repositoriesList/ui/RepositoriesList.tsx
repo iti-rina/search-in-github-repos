@@ -8,7 +8,37 @@ import styles from './RepositoryList.module.css';
 
 const RepositoriesList: FC = observer(() => {
   const { isLoading, hasMore } = githubReposStore;
-  const listRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLDivElement | null>(null);  
+  
+  useEffect(() => {
+      githubReposStore.getRepositories();
+  
+      const handleScroll = throttle(() => {
+        if (isLoading || !hasMore) return;
+  
+        if (listRef.current) {
+          const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+          if (scrollHeight - scrollTop - clientHeight < 100) {
+            githubReposStore.getRepositories();
+          }
+        }
+      }, 200);
+  
+      const currentRef = listRef.current;
+      if (currentRef) {
+        currentRef.addEventListener('scroll', handleScroll);
+      } else {
+        window.addEventListener('scroll', handleScroll);
+      }
+  
+      return () => {
+        if (currentRef) {
+          currentRef.removeEventListener('scroll', handleScroll);
+        } else {
+          window.removeEventListener('scroll', handleScroll);
+        }
+      };
+    }, [isLoading, hasMore]);
 
   return (
     <div
