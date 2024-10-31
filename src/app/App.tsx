@@ -1,10 +1,20 @@
-const App = () => {
+import { Typography } from 'antd';
+import { RepositoriesList } from '../features/repositoriesList/ui';
+import { Search } from '../widgets/Search/ui';
 
+const App = () => {
   return (
     <>
-      <h1>Search GitHub repositories</h1>
+      <Typography.Title level={1}>Search GitHub repositories</Typography.Title>
+      <Search />
+      <RepositoriesList />
     </>
   )
 }
 
 export default App
+
+
+
+
+
