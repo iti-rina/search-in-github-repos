@@ -24,8 +24,8 @@ const RepositoryItem: FC<RepositoryProps> = observer(({ repository }) => {
     setOpen(false);
   };
 
-  const handleDelete = (id: number) => {
-    githubReposStore.deleteRepository(id);
+  const handleDelete = () => {
+    githubReposStore.deleteRepository(repository.id);
   };
 
   const tag = repository.repository_language ? <Tag bordered={false} color='cyan'>{repository.repository_language}</Tag> : null;
