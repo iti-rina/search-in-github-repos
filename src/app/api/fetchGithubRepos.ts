@@ -11,7 +11,7 @@ export async function fetchGithubRepos(searchQuery: string, currentPage: number 
   try {
     const response = await axios.get<SearchRepositoriesResponse>('https://api.github.com/search/repositories', {
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
+        // Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
       },
       params: {
         q: searchQuery,
