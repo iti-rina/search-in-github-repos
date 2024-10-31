@@ -38,7 +38,7 @@ const RepositoriesList: FC = observer(() => {
           window.removeEventListener('scroll', handleScroll);
         }
       };
-    }, [isLoading, hasMore]);
+    }, []);
 
   return (
     <div
