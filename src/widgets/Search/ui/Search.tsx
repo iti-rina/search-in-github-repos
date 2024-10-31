@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { Input } from 'antd';
+import { observer } from 'mobx-react-lite';
+import githubReposStore from '../../../app/model/githubReposStore';
+import styles from './Search.module.css'
 
 const { Search } = Input;
 
-const SearchComponent = () => {
+const SearchComponent = observer(() => {
   const [value, setValue] = useState('');
-  let isLoading = false;
+
   const handleSearch = () => {
-    isLoading = true;
-    isLoading = false;
+    if (githubReposStore.searchQuery !== value) {
+      githubReposStore.searchRepositories(value);
+      setValue('');
+    }
   };
 
   return (
@@ -19,9 +24,10 @@ const SearchComponent = () => {
       placeholder='Enter a search string' 
       enterButton='Search' 
       size='large'
-      loading={isLoading}
+      loading={githubReposStore.isLoading}
+      className={styles.search}
     />
   );
-}
+})
 
 export default SearchComponent;
