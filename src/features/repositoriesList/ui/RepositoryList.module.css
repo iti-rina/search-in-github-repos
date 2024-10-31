@@ -1,0 +1,6 @@
+.wrapper {
+  max-width: 1200px;
+  height: '100vh';
+  overflow-y: 'auto';
+  margin: 0 auto;
+}
