@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+# Поиск GitHub репозиториев
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Суть задания
 
-Currently, two official plugins are available:
+Необходимо получить с сервера и отобразить список элементов. Список должен поддерживать бесконечный плавный скролл, постепенную подгрузку элементов, локальное удаление и редактирование.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Возникшие проблемы и принятые решения в формате ADR
 
-## Expanding the ESLint configuration
+- [Выбор API](./docs/adrs/001-api.md)
+- [Использование Feature-Sliced Design](./docs/adrs/002-feature-sliced-design.md)
+- [Выбор библиотеки компонентов](./docs/adrs/003-library-of-components.md)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Сборка проекта
+### Локальная сборка через npm
 
-- Configure the top-level `parserOptions` property like this:
+Требования:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- node 20 и выше
+- npm 10 и выше
+- отсутствие приложений на `:5173`
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Порядок запуска:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- ставим зависимости: `npm install`
+- запускаем приложение: `npm run start`
+- переходим на http://127.0.0.1:5173
+- запуск unit-тестов: `npm run test`
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+
+
